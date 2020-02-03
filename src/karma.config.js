@@ -6,6 +6,12 @@ const path = require('path');
 const envify = require('loose-envify/custom');
 const glob = require('glob');
 
+const babelify = require('babelify');
+const {
+  cacheTransformFactory,
+} = require('../scripts/gulp/cache-transform-stream');
+const cachingBabelify = cacheTransformFactory('karma-babelify', babelify);
+
 let chromeFlags = [];
 process.env.CHROME_BIN = require('puppeteer').executablePath();
 
@@ -113,7 +119,7 @@ module.exports = function(config) {
       transform: [
         'coffeeify',
         [
-          'babelify',
+          cachingBabelify,
           {
             // The transpiled CoffeeScript is fed through Babelify to add
             // code coverage instrumentation for Istanbul.

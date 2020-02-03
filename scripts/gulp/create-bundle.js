@@ -15,7 +15,10 @@ const envify = require('loose-envify/custom');
 const mkdirp = require('mkdirp');
 const watchify = require('watchify');
 
+const { cacheTransformFactory } = require('./cache-transform-stream');
 const minifyStream = require('./minify-stream');
+
+const cachingBabelify = cacheTransformFactory('create-bundle-babelify', babelify);
 
 function streamFinished(stream) {
   return new Promise(function(resolve, reject) {
@@ -187,7 +190,7 @@ module.exports = function createBundle(config, buildOpts) {
       bundle.transform(coffeeify);
     }
     if (transform === 'babel') {
-      bundle.transform(babelify);
+      bundle.transform(cachingBabelify);
     }
   });
 
