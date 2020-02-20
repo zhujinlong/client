@@ -5,6 +5,7 @@
 export default {
   PANEL_HELP: 'help',
   PANEL_LOGIN_PROMPT: 'loginPrompt',
+  PANEL_SEARCH: 'search',
   PANEL_SHARE_ANNOTATIONS: 'shareGroupAnnotations',
   TAB_ANNOTATIONS: 'annotation',
   TAB_NOTES: 'note',

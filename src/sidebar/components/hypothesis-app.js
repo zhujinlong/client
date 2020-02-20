@@ -13,6 +13,7 @@ import { withServices } from '../util/service-context';
 
 import AnnotationViewerContent from './annotation-viewer-content';
 import HelpPanel from './help-panel';
+import SearchPanel from './search-panel';
 import ShareAnnotationsPanel from './share-annotations-panel';
 import SidebarContent from './sidebar-content';
 import StreamContent from './stream-content';
@@ -165,6 +166,7 @@ function HypothesisApp({
         <ToastMessages />
         <HelpPanel auth={authState} />
         <ShareAnnotationsPanel />
+        <SearchPanel />
 
         {route && (
           <main>

@@ -12,7 +12,6 @@ import { applyTheme } from '../util/theme';
 
 import Button from './button';
 import GroupList from './group-list';
-import SearchInput from './search-input';
 import SortMenu from './sort-menu';
 import StreamSearchInput from './stream-search-input';
 import UserMenu from './user-menu';
@@ -35,9 +34,6 @@ function TopBar({
   const showSharePageButton = !isThirdPartyService(settings);
   const loginLinkStyle = applyTheme(['accentColor'], settings);
 
-  const filterQuery = useStore(store => store.filterQuery());
-  const setFilterQuery = useStore(store => store.setFilterQuery);
-
   const pendingUpdateCount = useStore(store => store.pendingUpdateCount());
 
   const togglePanelFn = useStore(store => store.toggleSidebarPanel);
@@ -47,6 +43,7 @@ function TopBar({
   const toggleSharePanel = () => {
     togglePanelFn(uiConstants.PANEL_SHARE_ANNOTATIONS);
   };
+  const toggleSearchPanel = () => togglePanelFn(uiConstants.PANEL_SEARCH);
 
   const currentActivePanel = useStore(
     store => store.getState().sidebarPanels.activePanelName
@@ -129,7 +126,14 @@ function TopBar({
               useCompactStyle
             />
           )}
-          <SearchInput query={filterQuery} onSearch={setFilterQuery} />
+          <Button
+            className="top-bar__icon-button"
+            icon="search"
+            isPressed={currentActivePanel === uiConstants.PANEL_SEARCH}
+            onClick={toggleSearchPanel}
+            title="Search"
+            useCompactStyle
+          />
           <SortMenu />
           {showSharePageButton && (
             <Button
