@@ -55,5 +55,13 @@ export default function autosaveService(annotationsService, store) {
     init() {
       store.subscribe(autosaveNewHighlights);
     },
+
+    /**
+     * Return `true` if this service is currently saving any highlights.
+     * @return {boolean}
+     */
+    isSaving() {
+      return saving.size > 0;
+    },
   };
 }
