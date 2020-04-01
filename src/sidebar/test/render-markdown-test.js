@@ -70,6 +70,10 @@ describe('render-markdown', function () {
         '<p><a href="http://example.com" target="_blank">test</a></p>'
       );
     });
+
+    it('turns single new lines in paragraphs into <br> tags', () => {
+      assert.equal(render('one\ntwo'), '<p>one<br>two</p>');
+    });
   });
 
   describe('math blocks', function () {

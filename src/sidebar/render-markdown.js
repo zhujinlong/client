@@ -19,6 +19,7 @@ function renderMarkdown(markdown) {
   if (!configured) {
     marked.setOptions({
       renderer: new marked.Renderer(),
+      breaks: true,
       gfm: true,
       silent: true,
     });
