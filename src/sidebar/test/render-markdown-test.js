@@ -2,7 +2,9 @@ import renderMarkdown from '../render-markdown';
 import { $imports } from '../render-markdown';
 
 describe('render-markdown', function () {
-  let render;
+  function render(markdown) {
+    return renderMarkdown(markdown).trim();
+  }
 
   beforeEach(function () {
     $imports.$mock({
@@ -16,9 +18,6 @@ describe('render-markdown', function () {
         },
       },
     });
-    render = function (markdown) {
-      return renderMarkdown(markdown);
-    };
   });
 
   afterEach(() => {
@@ -60,14 +59,14 @@ describe('render-markdown', function () {
       // library. This is not an extensive test of sanitization behavior, that
       // is left to DOMPurify's tests.
       assert.equal(
-        renderMarkdown('one **two** <script>alert("three")</script>'),
+        render('one **two** <script>alert("three")</script>'),
         '<p>one <strong>two</strong> </p>'
       );
     });
 
     it('should open links in a new window', () => {
       assert.equal(
-        renderMarkdown('<a href="http://example.com">test</a>'),
+        render('<a href="http://example.com">test</a>'),
         '<p><a href="http://example.com" target="_blank">test</a></p>'
       );
     });
@@ -82,7 +81,7 @@ describe('render-markdown', function () {
       assert.equal(
         render('one $$x*2$$ two $$x*3$$ three'),
         '<p>one </p>\n<p>math+display:x*2</p>\n' +
-          '<p>two </p>\n<p>math+display:x*3</p>\n<p>three</p>'
+          '<p> two </p>\n<p>math+display:x*3</p>\n<p> three</p>'
       );
     });
 

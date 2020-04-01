@@ -12,7 +12,6 @@ module.exports = {
     angular: ['angular', 'angular-toastr'],
     katex: ['katex'],
     sentry: ['@sentry/browser'],
-    showdown: ['showdown'],
   },
 
   // List of modules to exclude from parsing for require() statements.
