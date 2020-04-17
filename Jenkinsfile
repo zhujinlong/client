@@ -141,6 +141,8 @@ stage('Publish') {
     node {
         checkout scm
 
+        workspace = pwd()
+
         echo "Publishing ${pkgName} v${newPkgVersion} from ${releaseFromBranch} branch."
 
         nodeEnv.inside("-e HOME=${workspace} -e BRANCH_NAME=${env.BRANCH_NAME}") {
