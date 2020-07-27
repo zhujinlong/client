@@ -21,12 +21,9 @@ function AnnotationShareControl({
   group,
   shareUri,
 }) {
-  const annotationIsPrivate = isPrivate(
-    annotation.permissions,
-    annotation.user
-  );
-  const shareRef = useRef();
-  const inputRef = useRef();
+  const annotationIsPrivate = isPrivate(annotation.permissions);
+  const shareRef = useRef(/** @type {HTMLDivElement|null} */ (null));
+  const inputRef = useRef(/** @type {HTMLInputElement|null} */ (null));
 
   const [isOpen, setOpen] = useState(false);
   const wasOpen = useRef(isOpen);
@@ -87,6 +84,7 @@ function AnnotationShareControl({
 
   return (
     <div className="annotation-share-control" ref={shareRef}>
+      {/** @ts-ignore - Fix Button component type */}
       <Button
         icon="share"
         title="Share"
@@ -110,6 +108,7 @@ function AnnotationShareControl({
                 readOnly
                 ref={inputRef}
               />
+              {/** @ts-ignore - Fix Button component type */}
               <Button
                 icon="copy"
                 title="Copy share link to clipboard"
