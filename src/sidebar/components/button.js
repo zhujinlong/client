@@ -4,11 +4,26 @@ import propTypes from 'prop-types';
 import SvgIcon from '../../shared/components/svg-icon';
 
 /**
+ * @typedef ButtonProps
+ * @prop {string} [buttonText] - The presence of this property indicates that the button will have a visibly-rendered label (with this prop's value). For brevity, when providing `buttonText`, the `title` prop is optional—if `title` is not present, the value of `buttonText` will be used for the button's `title` attribute, as they are typically identical. When this prop is missing, an icon-only button will be rendered.
+ * @prop {string} [className] - When present, this will be used as the base class name and will override all styling. See `buttons` SCSS mixins module for more details.
+ * @prop {Object} [icon] - The name of the SVGIcon to render. This is optional if a `buttonText` is provided.
+ * @prop {boolean} [isExpanded] - Is the expandable element controlled by this button currently expanded?
+ * @prop {boolean} [isPressed] - Indicate that this is a toggle button (if `isPressed` is a boolean) and whether it is pressed.  If omitted, the button is a non-toggle button.
+ * @prop {() => any} [onClick] - callback for button clicks
+ * @prop {boolean} [disabled] - disables the button when true
+ * @prop {Object} [style] - optional inline styling
+ * @prop {Object} [title] - `title`, used for button `title`, is required unless `buttonText` is present
+ */
+
+/**
  * A button.
  *
  * By default, styling will be applied for the button based on its general
  * "type" (e.g. an icon-only button, a labeled button). The presence of a
  * `className` prop will disable all default styling.
+ *
+ * @param {ButtonProps} props
  */
 export default function Button({
   buttonText = '',
